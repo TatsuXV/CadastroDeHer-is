@@ -1,5 +1,6 @@
-package dev.java.CadastroDeHeros;
+package dev.java.CadastroDeHeros.heros;
 
+import dev.java.CadastroDeHeros.trabalhos.MuralDeTrabalhos;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +13,10 @@ public class HeroModel {
     private String nome;
     private String email;
     private int idade;
+
+    @ManyToMany
+    @JoinColumn(name = "trabalho_id")
+    private MuralDeTrabalhos job;
 
     public HeroModel(){}
 

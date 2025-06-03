@@ -1,4 +1,4 @@
-package dev.java.CadastroDeHeros;
+package dev.java.CadastroDeHeros.heros;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
