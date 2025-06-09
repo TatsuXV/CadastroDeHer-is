@@ -28,7 +28,7 @@ public class HeroModel {
     @Column(name = "idade")
     private int idade;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "trabalho_id")
     private MuralDeTrabalhos job;
 }

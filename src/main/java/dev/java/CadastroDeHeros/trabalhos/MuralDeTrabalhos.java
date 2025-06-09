@@ -22,6 +22,6 @@ public class MuralDeTrabalhos {
     private String trabalho;
     private String dificuldade;
 
-    @OneToMany(mappedBy = "trabalhos" )
-    private List<HeroModel> hero;
+    @OneToMany(mappedBy = "job")
+    private List<HeroModel> herois;
 }
