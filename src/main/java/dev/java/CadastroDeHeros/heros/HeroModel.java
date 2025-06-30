@@ -1,5 +1,6 @@
 package dev.java.CadastroDeHeros.heros;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java.CadastroDeHeros.trabalhos.MuralDeTrabalhos;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,5 +31,6 @@ public class HeroModel {
 
     @ManyToOne
     @JoinColumn(name = "trabalho_id")
+    @JsonIgnore
     private MuralDeTrabalhos job;
 }
