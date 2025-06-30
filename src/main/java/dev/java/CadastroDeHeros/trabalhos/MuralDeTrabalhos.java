@@ -1,5 +1,6 @@
 package dev.java.CadastroDeHeros.trabalhos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java.CadastroDeHeros.heros.HeroModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
