@@ -2,6 +2,7 @@ package dev.java.CadastroDeHeros.heros;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RequestMapping("/heros")
@@ -32,9 +33,9 @@ public class HerosController {
     }
 
     //Mostrar Herói por ID (READ)
-    @GetMapping("/todosID")
-    public String mostrarTodosOsHeróiID(){
-        return "Mostrar Herói por ID";
+    @GetMapping("/todos/{ID}")
+    public HeroModel mostrarTodosOsHeróiID(@PathVariable Long Id){
+        return heroserv.listarHeroPorId(Id);
     }
 
     //Alterar Dados dos Heróis (UPDATE)
