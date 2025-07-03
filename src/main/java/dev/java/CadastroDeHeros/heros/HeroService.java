@@ -26,4 +26,8 @@ public class HeroService {
     public HeroModel criarHeroi(HeroModel heroi){
         return herosRepository.save(heroi);
     }
+
+    public void deletarHeroiPorid(Long id){
+        herosRepository.deleteById(id);
+    }
 }

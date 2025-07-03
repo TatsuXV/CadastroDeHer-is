@@ -45,9 +45,9 @@ public class HerosController {
     }
 
     //Excluir Herói(DELETE)
-    @DeleteMapping("/deletarID")
-    public String deletarHeróiPorID(){
-        return "Deletar Herói por ID";
+    @DeleteMapping("/deletar/{ID}")
+    public void deletarHeróiPorID(@PathVariable Long id){
+        heroserv.deletarHeroiPorid(id);
     }
 
 
