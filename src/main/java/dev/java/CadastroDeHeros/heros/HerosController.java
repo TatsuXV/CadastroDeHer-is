@@ -22,8 +22,8 @@ public class HerosController {
 
     //Criar heroi (CREATE)
     @PostMapping("/criar")
-    public String criarHeroi(){
-        return "Heróicriado";
+    public HeroModel criarHero(@RequestBody HeroModel heroi){
+        return heroserv.criarHeroi(heroi);
     }
 
     //Mostrar todos os heróis (READ)

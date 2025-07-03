@@ -22,4 +22,8 @@ public class HeroService {
         Optional<HeroModel> heroPorId = herosRepository.findById(id);
         return heroPorId.orElse(null);
     }
+
+    public HeroModel criarHeroi(HeroModel heroi){
+        return herosRepository.save(heroi);
+    }
 }
