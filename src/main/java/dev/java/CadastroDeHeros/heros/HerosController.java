@@ -39,9 +39,9 @@ public class HerosController {
     }
 
     //Alterar Dados dos Heróis (UPDATE)
-    @PutMapping("/alterarID")
-    public String alterarHeróiPorID(){
-        return "Alterar Herói por id";
+    @PutMapping("/alterar/{id}")
+    public HeroModel atualizarheroi(@PathVariable Long id, @RequestBody HeroModel ninjaAtualizado){
+        return heroserv.atualizarHeroi(id, ninjaAtualizado);
     }
 
     //Excluir Herói(DELETE)

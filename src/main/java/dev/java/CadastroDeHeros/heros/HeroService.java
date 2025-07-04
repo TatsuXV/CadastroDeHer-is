@@ -27,6 +27,13 @@ public class HeroService {
         return herosRepository.save(heroi);
     }
 
+    public HeroModel atualizarHeroi(Long id, HeroModel heroAtualizar){
+        if(herosRepository.existsById(id)){
+            heroAtualizar.setId(id);
+            return herosRepository.save(heroAtualizar);
+        }return null;
+    }
+
     public void deletarHeroiPorid(Long id){
         herosRepository.deleteById(id);
     }
