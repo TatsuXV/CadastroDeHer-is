@@ -1,0 +1,2 @@
+ALTER TABLE tb_cadastro
+ADD COLUMN iMG VARCHAR(255);

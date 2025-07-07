@@ -22,7 +22,7 @@ public class HerosController {
 
     //Criar heroi (CREATE)
     @PostMapping("/criar")
-    public HeroModel criarHero(@RequestBody HeroModel heroi){
+    public HeroDTO criarHero(@RequestBody HeroDTO heroi){
         return heroserv.criarHeroi(heroi);
     }
 

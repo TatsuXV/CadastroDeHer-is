@@ -9,9 +9,11 @@ import java.util.Optional;
 public class HeroService {
 
     private HerosRepository herosRepository;
+    private HeroMapper heroMapper;
 
-    public HeroService(HerosRepository herosRepository) {
+    public HeroService(HerosRepository herosRepository, HeroMapper heroMapper) {
         this.herosRepository = herosRepository;
+        this.heroMapper = heroMapper;
     }
 
     public List<HeroModel> listarheroi(){
@@ -23,8 +25,10 @@ public class HeroService {
         return heroPorId.orElse(null);
     }
 
-    public HeroModel criarHeroi(HeroModel heroi){
-        return herosRepository.save(heroi);
+    public HeroDTO criarHeroi(HeroDTO heroi){
+        HeroModel nome = heroMapper.map(heroi);
+        nome = herosRepository.save(nome);
+        return heroMapper.map(nome);
     }
 
     public HeroModel atualizarHeroi(Long id, HeroModel heroAtualizar){
