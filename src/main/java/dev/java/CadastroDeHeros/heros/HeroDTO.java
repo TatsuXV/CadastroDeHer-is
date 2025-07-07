@@ -1,8 +1,6 @@
 package dev.java.CadastroDeHeros.heros;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java.CadastroDeHeros.trabalhos.MuralDeTrabalhos;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NinjaDTO {
+public class HeroDTO {
 
     private long id;
     private String nome;
