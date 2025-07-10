@@ -29,6 +29,12 @@ public class HeroModel {
     @Column(name = "idade")
     private int idade;
 
+    @Column(name = "rank")
+    private String rank;
+
+    @Column(name = "imagem")
+    private String iMG_url;
+
     @ManyToOne
     @JoinColumn(name = "trabalho_id")
     @JsonIgnore

@@ -22,25 +22,25 @@ public class HerosController {
 
     //Criar heroi (CREATE)
     @PostMapping("/criar")
-    public HeroModel criarHero(@RequestBody HeroModel heroi){
+    public HeroDTO criarHero(@RequestBody HeroDTO heroi){
         return heroserv.criarHeroi(heroi);
     }
 
     //Mostrar todos os heróis (READ)
     @GetMapping("/todos")
-    public List<HeroModel> listarHeroi(){
+    public List<HeroDTO> listarHeroi(){
         return heroserv.listarheroi();
     }
 
     //Mostrar Herói por ID (READ)
     @GetMapping("/todos/{ID}")
-    public HeroModel mostrarTodosOsHeróiID(@PathVariable Long Id){
+    public HeroDTO mostrarTodosOsHeróiID(@PathVariable Long Id){
         return heroserv.listarHeroPorId(Id);
     }
 
     //Alterar Dados dos Heróis (UPDATE)
     @PutMapping("/alterar/{id}")
-    public HeroModel atualizarheroi(@PathVariable Long id, @RequestBody HeroModel ninjaAtualizado){
+    public HeroDTO atualizarheroi(@PathVariable Long id, @RequestBody HeroDTO ninjaAtualizado){
         return heroserv.atualizarHeroi(id, ninjaAtualizado);
     }
 
