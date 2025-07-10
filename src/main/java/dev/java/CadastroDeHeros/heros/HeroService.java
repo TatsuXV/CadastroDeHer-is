@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class HeroService {
@@ -16,13 +17,16 @@ public class HeroService {
         this.heroMapper = heroMapper;
     }
 
-    public List<HeroModel> listarheroi(){
-        return herosRepository.findAll();
+    public List<HeroDTO> listarheroi(){
+        List <HeroModel> heroi = herosRepository.findAll();
+        return heroi.stream()
+                .map(heroMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public HeroModel listarHeroPorId(Long id){
+    public HeroDTO listarHeroPorId(Long id){
         Optional<HeroModel> heroPorId = herosRepository.findById(id);
-        return heroPorId.orElse(null);
+        return heroPorId.map(heroMapper::map).orElse(null);
     }
 
     public HeroDTO criarHeroi(HeroDTO heroi){
@@ -31,11 +35,14 @@ public class HeroService {
         return heroMapper.map(nome);
     }
 
-    public HeroModel atualizarHeroi(Long id, HeroModel heroAtualizar){
-        if(herosRepository.existsById(id)){
-            heroAtualizar.setId(id);
-            return herosRepository.save(heroAtualizar);
-        }return null;
+    public HeroDTO atualizarHeroi(Long id, HeroDTO heroDTO){
+        Optional<HeroModel> heroiExistente = herosRepository.findById(id);
+        if (heroiExistente.isPresent()){
+            HeroModel heroiAtualizado = heroMapper.map(heroDTO);
+            heroiAtualizado.setId(id);
+            HeroModel heroiSalvo = herosRepository.save(heroiAtualizado);
+            return heroMapper.map(heroiSalvo);
+        } return null;
     }
 
     public void deletarHeroiPorid(Long id){
