@@ -1,5 +1,7 @@
 package dev.java.CadastroDeHeros.heros;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -22,8 +24,10 @@ public class HerosController {
 
     //Criar heroi (CREATE)
     @PostMapping("/criar")
-    public HeroDTO criarHero(@RequestBody HeroDTO heroi){
-        return heroserv.criarHeroi(heroi);
+    public ResponseEntity <String> criarHero(@RequestBody HeroDTO heroi){
+        HeroDTO herocriado = heroserv.criarHeroi(heroi);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Heroi criado com sucesso: " + herocriado.getNome() + " Id: " + herocriado.getId());
     }
 
     //Mostrar todos os heróis (READ)
@@ -34,20 +38,39 @@ public class HerosController {
 
     //Mostrar Herói por ID (READ)
     @GetMapping("/todos/{ID}")
-    public HeroDTO mostrarTodosOsHeróiID(@PathVariable Long Id){
-        return heroserv.listarHeroPorId(Id);
+    public ResponseEntity<?> mostrarTodosOsHeróiID(@PathVariable Long Id){
+        HeroDTO heroi = heroserv.listarHeroPorId(Id);
+        if (heroi != null){
+            return ResponseEntity.ok(heroi);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("o heroi do id: "+ Id + " não existe");
+        }
     }
 
     //Alterar Dados dos Heróis (UPDATE)
     @PutMapping("/alterar/{id}")
-    public HeroDTO atualizarheroi(@PathVariable Long id, @RequestBody HeroDTO ninjaAtualizado){
-        return heroserv.atualizarHeroi(id, ninjaAtualizado);
+    public ResponseEntity<?> atualizarheroi(@PathVariable Long id, @RequestBody HeroDTO ninjaAtualizado){
+        HeroDTO heroi = heroserv.atualizarHeroi(id, ninjaAtualizado);
+
+        if (heroi != null){
+            return ResponseEntity.ok(heroi);
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Não encontramos o id: "+id+" nos nossos registros");
+        }
     }
 
     //Excluir Herói(DELETE)
     @DeleteMapping("/deletar/{ID}")
-    public void deletarHeróiPorID(@PathVariable Long id){
-        heroserv.deletarHeroiPorid(id);
+    public ResponseEntity<String> deletarHeróiPorID(@PathVariable Long id){
+        if (heroserv.listarHeroPorId(id) != null){
+            heroserv.deletarHeroiPorid(id);
+            return ResponseEntity.ok("voce apagou o id: "+id+" com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("O heroi nao foi encontrado para deletar");
+        }
     }
 
 
